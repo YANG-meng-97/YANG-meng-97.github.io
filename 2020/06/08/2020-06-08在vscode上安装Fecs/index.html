@@ -1,52 +1,52 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><title>2020-06-08在vscode上安装Fecs • Hexo</title><meta name="description" content="2020-06-08在vscode上安装Fecs - YANG-meng-97"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="https://unpkg.com/nanoreset@3.0.1/nanoreset.min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/atom.xml" title="Hexo"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="Hexo"><img class="logo-image" src="/logo.svg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/about" target="_self">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">2020-06-08在vscode上安装Fecs</h1><div class="post-info"><a></a>2020-06-08</div><div class="post-content"><h1 id="在vscode上安装Fecs"><a href="#在vscode上安装Fecs" class="headerlink" title="在vscode上安装Fecs"></a>在vscode上安装Fecs</h1><p>[TOC]</p>
-<h2 id="下载Node-js"><a href="#下载Node-js" class="headerlink" title="下载Node.js"></a>下载Node.js</h2><p><strong>1.下载Node.js</strong></p>
+</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="Hexo"><img class="logo-image" src="/logo.svg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/about" target="_self">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">2020-06-08在vscode上安装Fecs</h1><div class="post-info"><a></a>2020-06-08</div><div class="post-content"><h4 id="下载Node-js"><a href="#下载Node-js" class="headerlink" title="下载Node.js"></a>下载Node.js</h4><p><strong>1.下载Node.js</strong></p>
 <p><a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="noopener">Node.je官方下载地址</a></p>
 <p>按照安装步骤一直按next，看可以更改安装路径，例如C:\node.js</p>
 <p><strong>2.检测安装是否成功</strong></p>
 <ul>
 <li>按win+R键，输入cmd，回车</li>
 </ul>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Ccmd.jpg" alt="cmd"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/cmd.jpg" alt="cmd"></p>
 <ul>
 <li>不管默认路径，输入node -v和npm -v，回车，会显示node,js和npm的版本，则安装成功</li>
 </ul>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Cversion.jpg" alt="version"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/version.jpg" alt="version"></p>
 <p>新版的Node.js已自带npm，安装Node.js时会一起安装，npm的作用就是对Node.js依赖的包进行管理，也可以理解为用来安装/卸载Node.js需要装的东西。</p>
 <p><strong>3.配置环境变量</strong></p>
 <ul>
 <li><p>在刚才Node.js的安装路径下C:\node.js，创建两个文件夹node_global和node_cache</p>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Ccheck.jpg" alt="check"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/check.jpg" alt="check"></p>
 </li>
 <li><p>在当前目录，长按Shift+鼠标右键，打开cmd命令行</p>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Copencmd.jpg" alt="opencmd"></p>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Copen.jpg" alt="open"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/opencmd.jpg" alt="opencmd"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/open.jpg" alt="open"></p>
 </li>
 <li><p>输入以下命令，回车</p>
 <p>npm config set prefix “D:\nodejs\node_global”<br>npm config set cache “D:\nodejs\node_cache”</p>
 </li>
 <li><p>点击“我的电脑”-&gt;右键-&gt;“属性”-&gt;“高级系统设置”-&gt;“高级”-&gt;“环境变量”</p>
 <p>系统变量</p>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Copensystem.jpg" alt="opensystem"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/opensystem.jpg" alt="opensystem"></p>
 <p>添加以下代码</p>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Caddsystem.jpg" alt="addsystem"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/addsystem.jpg" alt="addsystem"></p>
 <p>用户变量</p>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Copenuser.jpg" alt="openuser"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/openuser.jpg" alt="openuser"></p>
 <p>添加以下代码</p>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Cadduser.jpg" alt="adduser"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/adduser.jpg" alt="adduser"></p>
 </li>
 </ul>
 <p>  则配置成功。</p>
-<h2 id="下载vsCode"><a href="#下载vsCode" class="headerlink" title="下载vsCode"></a>下载vsCode</h2><p><a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">vsCode官方下载地址</a></p>
+<h4 id="下载vsCode"><a href="#下载vsCode" class="headerlink" title="下载vsCode"></a>下载vsCode</h4><p><a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">vsCode官方下载地址</a></p>
 <p>按照安装步骤一直按next，看可以更改安装路径，例如C:\vscode</p>
-<h2 id="安装Fecs"><a href="#安装Fecs" class="headerlink" title="安装Fecs"></a>安装Fecs</h2><p><strong>1.打开vsCode终端</strong></p>
+<h4 id="安装使用Fecs"><a href="#安装使用Fecs" class="headerlink" title="安装使用Fecs"></a>安装使用Fecs</h4><p><strong>1.打开vsCode终端</strong></p>
 <p>快捷键Ctrl+`    例如：这个点为Esc下面的那个键</p>
 <p><strong>2.安装Fecs</strong></p>
 <p>不用担心当前目录在哪儿，全局安装即可，直接输入：npm install fecs -g</p>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Cinstallfecs.jpg" alt="installfecs"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/installfecs.jpg" alt="installfecs"></p>
 <p>等待安装，安装好了。</p>
 <p><strong>3.使用Fecs</strong></p>
 <p>新建一个文件夹，来装载以后我们需要检测Fecs的代码，例如：Fecs-text；我们先写一个用来测试的index.html文件</p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/indexhtml.jpg" alt="indexhtml"></p>
 <p>可以发现这个文件的格式不太美观 ，空格太多。这是我们就需要Fecs来规范格式。</p>
 <ul>
 <li><p>打开终端，将终端的地址改为当前编写网页所在文件夹的位置</p>
@@ -54,19 +54,19 @@
 <p>前进下一级地址使用cd 文件夹名</p>
 </li>
 </ul>
-<p>  <img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Cchangeroute.jpg" alt="changeroute"></p>
+<p>  <img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/changeroute.jpg" alt="changeroute"></p>
 <p>  一定要保存需要进行Fecs规范的网页</p>
 <ul>
 <li><p>输入以下命令：fecs check</p>
 <p>然后就会告诉我们哪里有问题。</p>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Cfecscheck.jpg" alt="fecscheck"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/fecscheck.jpg" alt="fecscheck"></p>
 </li>
 <li><p>输入一下命令：fecs format</p>
-<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/C:%5Cblog%5CYANG-meng-97%5Csource_posts%5C2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs%5Cfecsformat.jpg" alt="fecsformat"></p>
+<p><img src="/2020/06/08/2020-06-08%E5%9C%A8vscode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/fecsforamt.jpg" alt="fecsformat"></p>
 <p>就会自动在fecs-test下生成一个output文件夹，里面就会有一个正确规范index.html文件。</p>
 </li>
 </ul>
 <p>  <strong>自此结束</strong></p>
-</div></article></div></main><footer><div class="paginator"><a class="next" href="/2020/06/06/2020-06-07Github-Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">next</a></div><div class="copyright"><p>&copy; 2020 <a href="https://YANG-meng-97.github.io">YANG-meng-97</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+</div></article></div></main><footer><div class="paginator"><a class="next" href="/2020/06/06/2020-06-06Github-Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2(1)/">next</a></div><div class="copyright"><p>&copy; 2020 <a href="https://YANG-meng-97.github.io">YANG-meng-97</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
     Barba.Pjax.start()
 })</script></body></html>
