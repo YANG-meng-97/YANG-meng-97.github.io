@@ -21,9 +21,8 @@
 <img src="/2020/06/06/2020-06-06Github+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2(1)/gitbashherewindow.jpg">
 
 <p><strong>3.输入命令</strong></p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git config --<span class="keyword">global</span> user.name <span class="string">"Your Name"</span></span><br><span class="line">$ git config --<span class="keyword">global</span> user.email <span class="string">"email@example.com"</span></span><br><span class="line">$ ssh-keygen -t rsa -C email@example.com  <span class="comment">// 生成ssh</span></span><br></pre></td></tr></table></figure>
-
-<p>Your Name和<a href="mailto:email@example.com">email@example.com</a>均为自己注册的git用户名和邮箱</p>
+<p>  <code>$ git config --global user.name &quot;Your Name&quot;</code><br>  <code>$ git config --global user.email &quot;email@example.com&quot;</code><br>  <code>$ ssh-keygen -t rsa -C email@example.com  // 生成ssh</code></p>
+<p><em><code>Your Name</code>和<code>email@example.com</code>均为自己注册的git用户名和邮箱</em></p>
 <p>注：每输入一条，按回车，后面全部直接回车，不填写东西</p>
 <p>进入C:\Users\Administrator\.ssh会查看到里面有两个文件</p>
 <p><img src="/2020/06/06/2020-06-06Github+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2(1)/checkid.jpg" alt="checkid"></p>
@@ -42,28 +41,48 @@
 </li>
 </ul>
 <p><strong>6.测试是否成功</strong></p>
-<p>在Git Bash中输入命令：$ ssh -T <a href="mailto:git@github.com">git@github.com</a></p>
+<p>在Git Bash中输入命令：<code>$ ssh -T git@github.com</code></p>
 <p>出现</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi whitescholars/whitescholars.github.io! You<span class="symbol">'ve</span> successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
-
+<p>Hi whitescholars/whitescholars.github.io! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
 <p>证明校验成功。</p>
-<h2 id="or-paste-to-another-app-instead-of-copy-paste-from-to-another-markdown-editor-Therefore-by-default-Copy-means-Copy-As-HTML-and-Paste-means-Paste-from-HTML"><a href="#or-paste-to-another-app-instead-of-copy-paste-from-to-another-markdown-editor-Therefore-by-default-Copy-means-Copy-As-HTML-and-Paste-means-Paste-from-HTML" class="headerlink" title="or paste to another app, instead of copy/paste from/to another markdown editor. Therefore, by default, Copy means Copy As HTML ( and Paste means Paste from HTML)."></a>or paste to another app, instead of copy/paste from/to another markdown editor. Therefore, by default, Copy means Copy As HTML ( and Paste means Paste from HTML).</h2><p>We create typora and want to make it your default markdown editor, thus copy and paste means copy from another app or paste to another app, instead of <em>copy/paste from/to another markdown editor</em>. Therefore, by default, <code>Copy</code> means <code>Copy As HTML</code> ( and <code>Paste</code> means <code>Paste from HTML</code>). </p>
-<p>However, after click “<strong>Copy Markdown source by default</strong>“, typora will copy selected text in HTML/markdown format (When pasting, rich editors will accept the HTML format, while plain text / code editor will accept the markdown source code format).</p>
-<p>To <strong>copy Markdown source code</strong> explicitly, please use shortcut key <code>shift+cmd+c</code> or <code>Copy as Markdown</code> from menu. To <strong>Copy as HTML Code</strong>, please select <code>Copy as HTML Code</code> from menu.</p>
-<h2 id="Smart-Paste"><a href="#Smart-Paste" class="headerlink" title="Smart Paste"></a>Smart Paste</h2><p><strong>Typora</strong> is able to analyze styles of the text content in your clipboard when pasting. For example, after pasting a <code>&lt;h1&gt;HEADING&lt;/h1&gt;</code> from some website, typora will keep the ‘first level heading’ format instead of paste ‘heading’ as plain text. </p>
-<p>To <strong>paste as markdown source</strong> or plain text, you should use <code>paste as plain text</code> or press the shortcut key: <code>shift+cmd+v</code>.</p>
-<h2 id="Themes"><a href="#Themes" class="headerlink" title="Themes"></a>Themes</h2><p>Please refer to <code>Help</code> → <code>Custom Themes</code> from menu bar.</p>
-<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>Currently Typora only support to export as <strong>PDF</strong> or <strong>HTML</strong>. More data format support as import/export will be integrated in future.</p>
-<h2 id="Auto-Save-and-File-Recovery"><a href="#Auto-Save-and-File-Recovery" class="headerlink" title="Auto Save and File Recovery"></a>Auto Save and File Recovery</h2><p>Typora support  auto save feature, user could enable it from preference panel. </p>
-<p>Typora does not provide professional version control and file backup feature, but typora would backup the last file content from time to time automatically, so even when typora crashes or users forget to save the file before close, it is possible to recovery most of the work by clicking <code>Recovery Unsaved Drafts</code> from preference folder, and copy out backed-up files. The File name in this folder is consists of last saved date, originally file name and last saved timestamp.</p>
-<h2 id="More-Useful-Tips-amp-Documents"><a href="#More-Useful-Tips-amp-Documents" class="headerlink" title="More Useful Tips &amp; Documents"></a>More Useful Tips &amp; Documents</h2><p><a href="https://support.typora.io/" target="_blank" rel="noopener">https://support.typora.io/</a></p>
-<h2 id="And-More"><a href="#And-More" class="headerlink" title="And More ?"></a>And More ?</h2><p>For more questions or feedbacks, please contact us by:</p>
+<h2 id="Hexo板块"><a href="#Hexo板块" class="headerlink" title="Hexo板块"></a>Hexo板块</h2><p><strong>1.安装Hexo</strong></p>
 <ul>
-<li>Home Page: <a href="http://typora.io" target="_blank" rel="noopener">http://typora.io</a></li>
-<li>Email: <a href="mailto:&#x68;&#105;&#x40;&#x74;&#121;&#112;&#x6f;&#114;&#97;&#46;&#105;&#111;">&#x68;&#105;&#x40;&#x74;&#121;&#112;&#x6f;&#114;&#97;&#46;&#105;&#111;</a></li>
-<li>Twitter <a href="https://twitter.com/typora" target="_blank" rel="noopener">@typora</a></li>
+<li><p>win+R键，输入cmd，进入之前新建的C:\blog文件夹</p>
+<p><img src="/2020/06/06/2020-06-06Github+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2(1)/cmd.jpg" alt="cmd"></p>
+<p><img src="/2020/06/06/2020-06-06Github+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2(1)/changeroute.jpg" alt="changeroute"></p>
+</li>
+<li><p>输入以下命令：</p>
+<p>#安装 hexo  -g全局安裝<br><code>npm install hexo-cli -g</code><br>#安装 hexo 部署到 git page 的 deployer<br><code>npm install hexo-deployer-git --save</code></p>
+<p>#检测是否安装成功<br><code>hexo -v</code></p>
+</li>
 </ul>
-<p>We opened a Github issue page in case you want to start a discussion or as an alternative way to report bugs/suggestions: <a href="https://github.com/typora/typora-issues/issues" target="_blank" rel="noopener">https://github.com/typora/typora-issues/issues</a></p>
+<p><strong>2.Hexo初始化博客配置</strong></p>
+<p>输入以下命令：</p>
+<p>#初始化配置+博客名<br><code>hexo init 博客名</code></p>
+<p>#进入博客名 文件夹<br><code>cd 博客名</code><br>#安装需要的相关依赖<br><code>npm install</code></p>
+<p><strong>3.本地运行博客</strong></p>
+<p>#cmd 进入博客根目录C:\blog\博客名</p>
+<p>#默认 4000端口运行<br><code>hexo s</code></p>
+<p>#自定义端口运行<br><code>hexo s -p 端口</code></p>
+<p>此时就可以用浏览器访问：<a href="http://localhost:4000/，默认Hexo页面效果" target="_blank" rel="noopener">http://localhost:4000/，默认Hexo页面效果</a></p>
+<p>在C:\blog\博客名\source_posts\hello-world.md中添加<code>## Hello Hexo</code> ，则可以实现修改内容，本地不用重新运行即可查看。</p>
+<p><strong>4.配置文件</strong></p>
+<p>修改配置：C:\blog\博客名_config.yml文件内容</p>
+<p>找到以下内容，进行修改。注意：不要破坏原有结果，包括空格。</p>
+<p>#博客作者<br><code>author: username</code></p>
+<p>#url 博客地址<br><code>url: https://usename.github.io</code></p>
+<p>#发布到哪个仓库的哪个分支<br><code>deploy:</code><br>  <code>type: git</code><br>  <code>repo: https://github.com/username/username.github.io.git</code><br>  <code>branch: master</code></p>
+<p><em><code>username</code>为你在Github上的用户名</em></p>
+<p><strong>5.发布到Github上</strong></p>
+<p>win+R键，输入cmd，进入C:\blog\博客名</p>
+<p>输入以下命令：</p>
+<p>#先生成<br><code>hexo g</code><br>#再提交到github<br><code>hexo d</code></p>
+<p>注意：需要关闭本地运行，Ctrl+C。</p>
+<p>如果在<code>hexo d</code>提示ERROR Deployer not found: git，则先安装hexo-deployer-git，输入以下命令：</p>
+<p><code>npm install hexo-deployer-git --save</code></p>
+<p>再执行上述命令。</p>
+<p>这样就可以通过<a href="https://username.github.io/进行博客访问了。" target="_blank" rel="noopener">https://username.github.io/进行博客访问了。</a></p>
+<p><strong>自此个人博客的搭建结束，接下来就进行个性化设置</strong></p>
 </div></article></div></main><footer><div class="paginator"><a class="prev" href="/2020/06/09/2020-06-09%E5%9C%A8vsCode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/">prev</a></div><div class="copyright"><p>&copy; 2020 <a href="https://YANG-meng-97.github.io">YANG-meng-97</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
     Barba.Pjax.start()
 })</script></body></html>
