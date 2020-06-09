@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><title>Github+Hexo搭建个人博客(2) • YANG-meng-97</title><meta name="description" content="Github+Hexo搭建个人博客(2) - YANG-meng-97"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="https://unpkg.com/nanoreset@3.0.1/nanoreset.min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/atom.xml" title="YANG-meng-97"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="YANG-meng-97" type="application/atom+xml">
+</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="YANG-meng-97"><img class="logo-image" src="/logo.svg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="https://github.com/YANG-meng-97" target="_blank">ABOUT</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Github+Hexo搭建个人博客(2)</h1><div class="post-info"><a></a>2020-06-09</div><div class="post-content"><h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>选择自己喜欢的主题，此处就以“icalm”主题为例。</p>
+<p><img src="/2020/06/09/2020-06-09Github+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2(2)/favoritethemes.jpg" alt="favoritethemes"></p>
+<p>点击进入，此时就进入到展示页面。点击Github进入网页著作者的Github（有些网页是点击About或Github图标进入）；进入仓库，搜索主题仓库。</p>
+<p><img src="/2020/06/09/2020-06-09Github+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2(2)/repository.jpg" alt="repository"></p>
+<p>点击对应主题博文，复制下载地址。</p>
+<p><img src="/2020/06/09/2020-06-09Github+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2(2)/repositorytwo.jpg" alt="repositorytwo"></p>
+<p>在站点名上长按Shift+右键，选择Git Bash here；或者win+R，输入cmd进入站点名的路径。输入以下命令，地址为刚才我们复制的下载地址，themes/hexo-theme-icalm是在本地文件夹中的名字</p>
+<p><code>$ git clone https://github.com/nameoverflow/hexo-theme-icalm.git themes/hexo-theme-icalm</code></p>
+<p>下载完成后就会在themes目录下生成一个hexo-theme-icalm文件。</p>
+<p>更改站点下的_config.yml文件，找到theme，更改为：</p>
+<p><code>theme: hexo-theme-icalm</code></p>
+<p>注意不要更改其本身的结构，把其余不用的主题用<code>#</code>注释。</p>
+<p>最后继续在站点路径下，输入以下代码：</p>
+<p>#清空缓存</p>
+<p><code>$ hexo clean</code></p>
+<p>#重新生成database</p>
+<p><code>$ hexo g</code></p>
+<p>#打开本地仓库服务，在默认端口下<a href="http://localhost:4000/可以看到更换主题后的页面" target="_blank" rel="noopener">http://localhost:4000/可以看到更换主题后的页面</a></p>
+<p><code>$ hexo s</code></p>
+<p>#上传到远程仓库</p>
+<p><code>$ hexo d</code></p>
+<p>注意：上传到远程仓库后，更新需要一定时间，所以不着急</p>
+<h2 id="添加文章"><a href="#添加文章" class="headerlink" title="添加文章"></a>添加文章</h2><p><strong>1.创建文章</strong></p>
+<p>在source/_post文件夹中，有默认的文章Hello World.md。</p>
+<p>如果需要添加图片，先打开站点配置文件_config.yml，找到<code>post_asset_folder</code>选项，将其设置为true。在站点文件夹中打开Git Bash，输入以下命令： <code>$ npm install hexo-asset-image --save</code>安装插件。</p>
+<p>在Git Bash，输入以下命令：<code>$ hexo new &quot;title&quot;</code>，就会在source/_post文件夹中生成一个.md类型的文本和一个同名文件夹。在编辑文章时，所需要的图片就放置在文件夹中，用相对路径添加图片。</p>
+<p><strong>2.编写文章</strong></p>
+<p>在此比较推荐<a href="https://www.typora.io/" target="_blank" rel="noopener">typora</a>编写md文件。不需要太多基础知识，就可以轻松实现；也可以点击typora页面的“帮助”-&gt;“Quick Start”，快速开始编写。</p>
+<p>编写完文章后，输入以下代码：</p>
+<p>#重新生成database</p>
+<p><code>$ hexo g</code></p>
+<p>#打开本地仓库服务，在默认端口下<a href="http://localhost:4000/可以看到新增文章" target="_blank" rel="noopener">http://localhost:4000/可以看到新增文章</a></p>
+<p><code>$ hexo s</code></p>
+<p>#上传到远程仓库</p>
+<p><code>$ hexo d</code></p>
+<p>注意：上传到远程仓库后，更新需要一定时间，所以不着急</p>
+</div></article></div></main><footer><div class="paginator"><a class="next" href="/2020/06/09/2020-06-09%E5%9C%A8vsCode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/">next</a></div><div class="copyright"><p>&copy; 2020 <a href="https://YANG-meng-97.github.io">YANG-meng-97</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+    Barba.Pjax.start()
+})</script></body></html>
