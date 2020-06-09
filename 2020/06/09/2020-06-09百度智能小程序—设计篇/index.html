@@ -1,6 +1,27 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><title>百度智能小程序—-设计篇 • YANG-meng-97</title><meta name="description" content="百度智能小程序—-设计篇 - YANG-meng-97"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="https://unpkg.com/nanoreset@3.0.1/nanoreset.min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/atom.xml" title="YANG-meng-97"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="YANG-meng-97" type="application/atom+xml">
-</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="YANG-meng-97"><img class="logo-image" src="/logo.svg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="https://github.com/YANG-meng-97" target="_blank">ABOUT</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">百度智能小程序—-设计篇</h1><div class="post-info"><a></a>2020-06-09</div><div class="post-content"><p>[TOC]</p>
-<h2 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h2><p><strong>1.基础布局</strong></p>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><title>百度智能小程序—设计篇 • YANG-meng-97</title><meta name="description" content="百度智能小程序—设计篇 - YANG-meng-97"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="https://unpkg.com/nanoreset@3.0.1/nanoreset.min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/atom.xml" title="YANG-meng-97"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="YANG-meng-97" type="application/atom+xml">
+</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="YANG-meng-97"><img class="logo-image" src="/logo.svg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="https://github.com/YANG-meng-97" target="_blank">ABOUT</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">百度智能小程序—设计篇</h1><div class="post-info"><a></a>2020-06-09</div><div class="post-content"><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#ye-mian-bu-ju">页面布局</a></li>
+<li><a href="#yue-du-pai-ban">阅读排版</a></li>
+<li><a href="#nei-rong-xiang-qing-ye">内容详情页</a></li>
+<li><a href="#logo-shu-chu">LOGO输出</a></li>
+<li><a href="#cuo-ci">措辞</a></li>
+<li><a href="#ding-bu-dao-hang-lan">顶部导航栏</a></li>
+<li><a href="#di-bu-biao-qian-lan">底部标签栏</a></li>
+<li><a href="#biao-qian-lan-lan-mu-xuan-xiang-tiao">标签栏（栏目选项条）</a></li>
+<li><a href="#an-niu">按钮</a></li>
+<li><a href="#xuan-ze">选择</a></li>
+<li><a href="#lie-biao">列表</a></li>
+<li><a href="#xiao-xi-ti-shi-kuang">消息提示框</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="ye-mian-bu-ju">页面布局</span></h2><p><strong>1.基础布局</strong></p>
 <p>基于宽度750px（iPhone6），需要为信息内容左右边距至少留出34px（17pt）。</p>
 <p><strong>2.透明框架布局适配</strong></p>
 <p>小程序顶部导航栏为透明，因此页面布局从屏幕顶部开始。页面内容应布局在安全区内。</p>
@@ -11,7 +32,7 @@
 <p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/safezonetwo.jpg" alt="safezonetwo"></p>
 <p>左：全面屏iPhone 安全区 = 屏幕 -（系统状态栏（1） + 框架控制功能区（2）+ 底部指示区（3））<br>右：全面屏安卓手机 安全区 = 屏幕 -（系统状态栏（1） + 框架控制功能区（2））</p>
 <p><em>默认情况下，底部指示区为透明，把底部指示区颜色适配为与底部栏一致。</em></p>
-<h2 id="阅读排版"><a href="#阅读排版" class="headerlink" title="阅读排版"></a>阅读排版</h2><p><strong>1.阅读视线流</strong></p>
+<h2><span id="yue-du-pai-ban">阅读排版</span></h2><p><strong>1.阅读视线流</strong></p>
 <p>把主要的信息内容放在屏幕左上角。</p>
 <p><strong>2.字体</strong></p>
 <p>小程序默认字库 “STHeiti SC”,”Microsoft YaHei”,”Helvetica Neue”,”Helvetica,Arial,sans-seri,系统字体”</p>
@@ -29,7 +50,7 @@
 <p>主要信息#000000，次要信息#333333，辅助信息#999999，附属信息#CCCCCC。</p>
 <p>蓝色：文字链接、提醒、完成#3C76FF-&gt;按下透明度降至20%；</p>
 <p>红色：警告、出错#F7534F-&gt;按下透明度降至20%。</p>
-<h2 id="内容详情页"><a href="#内容详情页" class="headerlink" title="内容详情页"></a>内容详情页</h2><p>图文详情页，动态详情页，视频详情页。</p>
+<h2><span id="nei-rong-xiang-qing-ye">内容详情页</span></h2><p>图文详情页，动态详情页，视频详情页。</p>
 <p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/content.jpg" alt="content"></p>
 <p><strong>1.基础布局</strong></p>
 <ul>
@@ -68,7 +89,7 @@
 <li>标题：字号24pt，行高16px；</li>
 <li>附属信息（可选）：字号12pt，行高12px。</li>
 </ul>
-<h2 id="LOGO输出"><a href="#LOGO输出" class="headerlink" title="LOGO输出"></a>LOGO输出</h2><p><strong>1.输出规格</strong></p>
+<h2><span id="logo-shu-chu">LOGO输出</span></h2><p><strong>1.输出规格</strong></p>
 <ul>
 <li>PNG、BMP、JPEG、JPG</li>
 <li>144x144px</li>
@@ -80,13 +101,13 @@
 <li>元素占比&gt;=70%，&lt;=80%。</li>
 <li>“图形+文字”，整体预留20%的出血区。</li>
 </ul>
-<h2 id="措辞"><a href="#措辞" class="headerlink" title="措辞"></a>措辞</h2><p><strong>1.称谓</strong></p>
+<h2><span id="cuo-ci">措辞</span></h2><p><strong>1.称谓</strong></p>
 <p>大多数情况下用“你”。避免在同一内容中混用“你”和“我”。“我们猜你喜欢”、“我们即将为你播放下一段视频”。</p>
 <p><strong>2.用词说明</strong></p>
 <p>中文表达，避免行业专业用语、语句简洁。</p>
 <p><strong>3.标点符号</strong></p>
 <p>中文全角、疑问句？、感叹句！</p>
-<h2 id="顶部导航栏"><a href="#顶部导航栏" class="headerlink" title="顶部导航栏"></a>顶部导航栏</h2><p>始终固定在屏幕顶部，不随页面滚动隐藏。</p>
+<h2><span id="ding-bu-dao-hang-lan">顶部导航栏</span></h2><p>始终固定在屏幕顶部，不随页面滚动隐藏。</p>
 <p>1-&gt;容器、2-&gt;内部页面导航功能区、3-&gt;页面标题（可选）、4-&gt;框架控制功能区、5-&gt;系统状态栏（不属于导航栏）</p>
 <p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/toppart.jpg" alt="toppart"></p>
 <ul>
@@ -120,7 +141,7 @@
 <p>1-&gt;导航栏容器默认#FFFFFF（可配），系统状态栏跟随，2-&gt;导航栏元素及状态栏元素#000000。</p>
 <p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/dingzhiwhite.jpg" alt="dingzhiwhite"></p>
 <p>1-&gt;导航栏容器#000000（可配），系统状态栏跟随，2-&gt;导航栏元素及状态栏元素#FFFFFF。</p>
-<h2 id="底部标签栏"><a href="#底部标签栏" class="headerlink" title="底部标签栏"></a>底部标签栏</h2><p>用于首页横向试图导航的切换，始终固定在屏幕底部，不随页面滚动隐藏。</p>
+<h2><span id="di-bu-biao-qian-lan">底部标签栏</span></h2><p>用于首页横向试图导航的切换，始终固定在屏幕底部，不随页面滚动隐藏。</p>
 <p>1–&gt;容器，2-&gt;标签选项。</p>
 <p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/bottom.jpg" alt="bottom"></p>
 <ul>
@@ -136,7 +157,7 @@
 <p><strong>2.个性定制</strong></p>
 <p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/bottomstyle.jpg" alt="bottomstyle"></p>
 <p>1-&gt;标签栏容器#FFFFFF（可配），2-&gt;标签名称-选中状态#000000（可配），3-&gt;标签名称-非选中态#999999（可配）</p>
-<h2 id="标签栏（栏目选项条）"><a href="#标签栏（栏目选项条）" class="headerlink" title="标签栏（栏目选项条）"></a>标签栏（栏目选项条）</h2><p>可以放在页面顶部，也可以放在页面中间；</p>
+<h2><span id="biao-qian-lan-lan-mu-xuan-xiang-tiao">标签栏（栏目选项条）</span></h2><p>可以放在页面顶部，也可以放在页面中间；</p>
 <p>可以点击完成，也可以添加“swiper”组件，左右滑动完成。</p>
 <p>1-&gt;容器、2-&gt;栏目选项。</p>
 <p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/secondtop.jpg" alt="secondtop"></p>
@@ -153,7 +174,7 @@
 <p><strong>2.个性定制</strong></p>
 <p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/secondtopstyle.jpg" alt="secondtopstyle"></p>
 <p>1-&gt;标签容器#FFFFFF（可配），2-&gt;标签名称-当前选中态#000000（可配），3-&gt;标签名称-非选中态#666666（可配）</p>
-<h2 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h2><p><strong>1.大按钮</strong></p>
+<h2><span id="an-niu">按钮</span></h2><p><strong>1.大按钮</strong></p>
 <p>高度88px，圆角8px，文案&lt;=8个字符。</p>
 <p>一个页面内，只能出现一个主操作按钮或警告操作按钮。</p>
 <p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/bigbottom.jpg" alt="bigbottom"></p>
@@ -165,7 +186,7 @@
 <p>与右侧和底部间距&gt;=34px。</p>
 <p>不要重复放置框架上已有的功能，包括“返回”，“关闭”等；用于跳转与当前内容有关页面；禁止承载与当前页面无关的内容入口。</p>
 <p>尽量减少阅读内容，比如上滑不显示，下滑渐显。</p>
-<h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p><strong>1.选项控件</strong></p>
+<h2><span id="xuan-ze">选择</span></h2><p><strong>1.选项控件</strong></p>
 <ul>
 <li>单选：radio</li>
 <li>多选：checkbox</li>
@@ -179,8 +200,8 @@
 <li>选项列数及各列内容</li>
 <li>用于时间选择场景时，可配置日期（年月日），时间（分秒）</li>
 </ul>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/list.jpg" alt="list"></p>
-<h2 id="消息提示框"><a href="#消息提示框" class="headerlink" title="消息提示框"></a>消息提示框</h2><p>默认2s消失</p>
+<h2><span id="lie-biao">列表</span></h2><p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/list.jpg" alt="list"></p>
+<h2><span id="xiao-xi-ti-shi-kuang">消息提示框</span></h2><p>默认2s消失</p>
 <p><strong>1.图文</strong></p>
 <p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/toast.jpg" alt="toast"></p>
 <p>1-&gt;小程序统一提供，不可定制，开发者可以修改反馈图标，2-&gt;可不选，3-&gt;提示文案</p>
