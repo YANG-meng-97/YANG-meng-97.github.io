@@ -16,7 +16,12 @@
 <li><a href="#xuan-ze">选择</a></li>
 <li><a href="#lie-biao">列表</a></li>
 <li><a href="#xiao-xi-ti-shi-kuang">消息提示框</a></li>
-<li><a href="#cheng-gong-liao">成功了！</a></li>
+<li><a href="#mo-shi-dui-hua-kuang">模式对话框</a></li>
+<li><a href="#di-bu-cao-zuo-cai-dan">底部操作菜单</a></li>
+<li><a href="#yin-dao-guan-zhu">引导关注</a></li>
+<li><a href="#kong-tai">空态</a></li>
+<li><a href="#lottie-dong-hua">Lottie动画</a></li>
+<li><a href="#afx-tou-ming-shi-pin">AFX透明视频</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -216,6 +221,38 @@
 <ul>
 <li>提示文案：&lt;=14个汉字</li>
 </ul>
-<h2><span id="cheng-gong-liao">成功了！</span></h2></div></article></div></main><footer><div class="paginator"><a class="next" href="/2020/06/09/2020-06-09Github+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2(2)/">next</a></div><div class="copyright"><p>&copy; 2020 <a href="https://YANG-meng-97.github.io">YANG-meng-97</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+<h2><span id="mo-shi-dui-hua-kuang">模式对话框</span></h2><p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/showtoast.jpg" alt="showtoast"></p>
+<p>1-&gt;容器，2-&gt;标题（可选，可配），3-&gt;内容（可配），4-&gt;操作按钮（1-2个，可配），5-&gt;蒙层。</p>
+<ul>
+<li>标题：&lt;=8个汉字；</li>
+<li>内容：不必以句号结尾，不可使用”！“，&lt;=50汉字；</li>
+<li>操作：默认双按钮，左“取消”，右“确定”，&lt;=4汉字；</li>
+</ul>
+<h2><span id="di-bu-cao-zuo-cai-dan">底部操作菜单</span></h2><p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/showactionsheet.jpg" alt="showactionsheet"></p>
+<p>1-&gt;容器，2-&gt;操作选项（可配），3-&gt;取消，4-&gt;蒙版</p>
+<ul>
+<li>操作选项：1-6个操作，&lt;=10个汉字，统一颜色；</li>
+<li>取消、蒙版：自动收起面板且不执行任何操作。</li>
+</ul>
+<h2><span id="yin-dao-guan-zhu">引导关注</span></h2><p><strong>1.浮层引导</strong></p>
+<p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/showfavoriteguide.jpg" alt="showfavoriteguide"></p>
+<ul>
+<li>关闭按钮：点击后，浮层消失；</li>
+<li>小程序头像：默认抓取小程序头像展现；</li>
+<li>引导内容：一键关注小程序；</li>
+<li>操作区：关注按钮，点击后直接执行关注小程序，浮层引导消失。</li>
+</ul>
+<p><strong>2.气泡引导</strong></p>
+<p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/showfavoriteguidetwo.jpg" alt="showfavoriteguidetwo"></p>
+<p>无操作后，5秒后自动消失，暂不支持自定义。</p>
+<h2><span id="kong-tai">空态</span></h2><p>指示页面无法显示内容时的情况，如网络错误、无内容数据等场景。</p>
+<p><strong>1.格式</strong></p>
+<p><img src="/2020/06/09/2020-06-09%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F%E2%80%94%E8%AE%BE%E8%AE%A1%E7%AF%87/valid.jpg" alt="valid"></p>
+<p><strong>2.页面布局</strong></p>
+<p>与页面空内容区域居中对齐。</p>
+<h2><span id="lottie-dong-hua">Lottie动画</span></h2><p>animation-view-lottie</p>
+<h2><span id="afx-tou-ming-shi-pin">AFX透明视频</span></h2><p>animation-video</p>
+<p>After Effects（不要出现“混合模式”）-&gt;导入合成（&lt;=800x800px,&lt;=60FPS）-&gt;合成输出PNG序列帧-&gt;AFX Creator转化为MP4视频</p>
+</div></article></div></main><footer><div class="paginator"><a class="next" href="/2020/06/09/2020-06-09Github+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2(2)/">next</a></div><div class="copyright"><p>&copy; 2020 <a href="https://YANG-meng-97.github.io">YANG-meng-97</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
     Barba.Pjax.start()
 })</script></body></html>
