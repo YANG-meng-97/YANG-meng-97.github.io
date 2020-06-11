@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><title>在vsCode上安装Fecs • YANG-meng-97</title><meta name="description" content="在vsCode上安装Fecs - YANG-meng-97"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="https://unpkg.com/nanoreset@3.0.1/nanoreset.min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/atom.xml" title="YANG-meng-97"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="YANG-meng-97" type="application/atom+xml">
-</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="YANG-meng-97"><img class="logo-image" src="/logo.svg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="https://github.com/YANG-meng-97" target="_blank">ABOUT</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">在vsCode上安装Fecs</h1><div class="post-info"><a></a>2020-06-09</div><div class="post-content"><h2 id="下载Node-js"><a href="#下载Node-js" class="headerlink" title="下载Node.js"></a>下载Node.js</h2><p><strong>1.下载Node.js</strong></p>
+</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="YANG-meng-97"><img class="logo-image" src="/logo.svg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="https://github.com/YANG-meng-97" target="_blank">ABOUT</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">在vsCode上安装Fecs</h1><div class="post-info"><a></a>2020-06-09</div><div class="post-content"><h2><span id="xia-zai-node-js">下载Node.js</span></h2><p><strong>1.下载Node.js</strong></p>
 <p><a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="noopener">Node.je官方下载地址</a></p>
 <p>按照安装步骤一直按next，看可以更改安装路径，例如C:\node.js</p>
 <p><strong>2.检测安装是否成功</strong></p>
@@ -38,9 +38,9 @@
 </li>
 </ul>
 <p>  则配置成功。</p>
-<h2 id="下载vsCode"><a href="#下载vsCode" class="headerlink" title="下载vsCode"></a>下载vsCode</h2><p><a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">vsCode官方下载地址</a></p>
+<h2><span id="xia-zai-vscode">下载vsCode</span></h2><p><a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">vsCode官方下载地址</a></p>
 <p>按照安装步骤一直按next，看可以更改安装路径，例如C:\vscode</p>
-<h2 id="安装使用Fecs"><a href="#安装使用Fecs" class="headerlink" title="安装使用Fecs"></a>安装使用Fecs</h2><p><strong>1.打开vsCode终端</strong></p>
+<h2><span id="an-zhuang-shi-yong-fecs">安装使用Fecs</span></h2><p><strong>1.打开vsCode终端</strong></p>
 <p>快捷键Ctrl+`    例如：这个点为Esc下面的那个键</p>
 <p><strong>2.安装Fecs</strong></p>
 <p>不用担心当前目录在哪儿，全局安装即可，直接输入：<code>npm install fecs -g</code></p>
@@ -54,14 +54,22 @@
 <li><p>打开终端，将终端的地址改为当前编写网页所在文件夹的位置</p>
 <p>返回上一级地址使用<code>cd..</code></p>
 <p>前进下一级地址使用<code>cd 文件夹名</code></p>
+<p>更改磁盘到d盘使用d:</p>
+<p><img src="/2020/06/09/2020-06-09%E5%9C%A8vsCode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/changeroute.jpg" alt="changeroute"></p>
+<p>一定要保存需要进行Fecs规范的网页</p>
 </li>
-</ul>
-<p>  <img src="/2020/06/09/2020-06-09%E5%9C%A8vsCode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/changeroute.jpg" alt="changeroute"></p>
-<p>  一定要保存需要进行Fecs规范的网页</p>
-<ul>
 <li><p>输入以下命令：<code>fecs check</code></p>
 <p>然后就会告诉我们哪里有问题。</p>
 <p><img src="/2020/06/09/2020-06-09%E5%9C%A8vsCode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/fecscheck.jpg" alt="fecscheck"></p>
+<p>如果有以下报错：</p>
+<p><code>fecs : 无法加载文件 D:\Setup\Nodejs\node_global\fecs.ps1，因为在此系统上禁止运行脚本。</code></p>
+<p>则输入以下代码：</p>
+<p>#显示Restricted（表示状态是禁止的） 【受限制的、保密的】</p>
+<p><code>get-ExecutionPolicy</code></p>
+<p><code>set-ExecutionPolicy RemoteSigned</code></p>
+<p>#显示RemoteSigned</p>
+<p><code>get-ExecutionPolicy</code></p>
+<p>再执行以上代码。</p>
 </li>
 <li><p>输入一下命令：<code>fecs format</code></p>
 <p><img src="/2020/06/09/2020-06-09%E5%9C%A8vsCode%E4%B8%8A%E5%AE%89%E8%A3%85Fecs/fecsformat.jpg" alt="fecsformat"></p>
