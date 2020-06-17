@@ -1,0 +1,553 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><title>百度智能小程序-基础原理篇 • YANG-meng-97</title><meta name="description" content="百度智能小程序-基础原理篇 - YANG-meng-97"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="https://unpkg.com/nanoreset@3.0.1/nanoreset.min.css"><link rel="stylesheet" href="/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/atom.xml" title="YANG-meng-97"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="YANG-meng-97" type="application/atom+xml">
+</head><body><div class="wrap" id="barba-wrapper"><header><h1 class="branding"><a href="/" title="YANG-meng-97"><img class="logo-image" src="/logo.svg" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link no-barba" href="/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="/archives" target="_self">ARCHIVES</a></li><li class="nav-list-item"><a class="nav-list-link no-barba" href="https://github.com/YANG-meng-97" target="_blank">ABOUT</a></li><li class="nav-list-item"></ul></header><div class="barba-container"><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">百度智能小程序-基础原理篇</h1><div class="post-info"><a></a>2020-06-15</div><div class="post-content"><div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#gai-lan">概览</a></li>
+<li><a href="#pei-zhi-app-json">配置app.json</a></li>
+<li><a href="#pei-zhi-app-js">配置app.js</a></li>
+<li><a href="#xiao-cheng-xu-ye-mian">小程序页面</a></li>
+<li><a href="#zi-ding-yi-zu-jian">自定义组件</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><span id="gai-lan">概览</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">├── app.js</span><br><span class="line">├── app.json</span><br><span class="line">├── app.css</span><br><span class="line">├── project.config.json</span><br><span class="line">└──  pages</span><br><span class="line">    └── index</span><br><span class="line">        ├── index.swan</span><br><span class="line">        ├── index.css</span><br><span class="line">        ├── index.js</span><br><span class="line">        └── index.json</span><br><span class="line">    └── detail</span><br><span class="line">        ├── detail.swan</span><br><span class="line">        ├── detail.css</span><br><span class="line">        ├── detail.js</span><br><span class="line">        └── detail.json</span><br></pre></td></tr></table></figure>
+
+<p>全局配置文件：app.json、app.js</p>
+<p>页面配置文件：.css、.js、.json、.swan（类似html）</p>
+<ul>
+<li>App、注册页面方法-&gt;注册小程序、每个页面；</li>
+<li>getApp、getCurrentPages方法-&gt;获取App实例、当前页面栈；</li>
+<li>每个页面有独立的文件作用域，并提供模块化；</li>
+</ul>
+<h2><span id="pei-zhi-app-json">配置app.json</span></h2><p><strong>1.pages 页面路径</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"pages"</span>:[</span><br><span class="line">        <span class="string">"pages/index/index"</span>,</span><br><span class="line">        <span class="string">"pages/detail/detail"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.window 页面展现</strong></p>
+<p>设置 SWAN 的状态栏、导航条、标题、窗口背景色。</p>
+<p>原生顶bar高度=状态栏高度（statusBarHeight）+顶部导航栏高度（navigationBarHeight）；可通过 swan.getSystemInfo或者 swan.getSystemInfoSync获取。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"window"</span>: &#123;</span><br><span class="line">        <span class="attr">"navigationBarBackgroundColor"</span>: <span class="string">"#ffffff"</span>,</span><br><span class="line">        <span class="attr">"navigationBarTextStyle"</span>: <span class="string">"black"</span>,</span><br><span class="line">        <span class="attr">"navigationBarTitleText"</span>: <span class="string">"swan接口功能演示"</span>,</span><br><span class="line">        <span class="attr">"backgroundColor"</span>: <span class="string">"#eeeeee"</span>,</span><br><span class="line">        <span class="attr">"backgroundTextStyle"</span>: <span class="string">"light"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.preloadRule 分包预下载规则</strong></p>
+<p><strong>4.tabBar 底部tab栏的表现</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"tabBar"</span>: &#123;</span><br><span class="line">        <span class="attr">"list"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"pagePath"</span>: <span class="string">"pages/index/index"</span>,</span><br><span class="line">                <span class="attr">"text"</span>: <span class="string">"首页"</span>,</span><br><span class="line">                <span class="attr">"iconPath"</span>:<span class="string">"/images/API_normal.png"</span>,</span><br><span class="line">                <span class="attr">"selectedIconPath"</span>:<span class="string">"/images/API_selected.png"</span></span><br><span class="line">        &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"pagePath"</span>: <span class="string">"pages/detail/detail"</span>,</span><br><span class="line">                <span class="attr">"text"</span>: <span class="string">"详情"</span>,</span><br><span class="line">                <span class="attr">"iconPath"</span>:<span class="string">"/images/component_normal.png"</span>,</span><br><span class="line">                <span class="attr">"selectedIconPath"</span>:<span class="string">"/images/component_selected.png"</span></span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"backgroundColor"</span> : <span class="string">"#ffffff"</span>,</span><br><span class="line">        <span class="attr">"borderStyle"</span>: <span class="string">"white"</span>,</span><br><span class="line">        <span class="attr">"color"</span>: <span class="string">"#000"</span>,</span><br><span class="line">        <span class="attr">"selectedColor"</span>: <span class="string">"#6495ED"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5.requireBackgroundModes 需要在后台使用的能力，如音乐播放</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"pages"</span>: [<span class="string">"pages/index/index"</span>],</span><br><span class="line">    <span class="attr">"requiredBackgroundModes"</span>: [<span class="string">"audio"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>6.subPackages 分包结构配置</strong></p>
+<p><strong>7.networkTimeout 网络超时</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">"networkTimeout": &#123;</span><br><span class="line">    "request": 30000,</span><br><span class="line">    "connectSocket": 10000,</span><br><span class="line">    "uploadFile": 10000,</span><br><span class="line">    "downloadFile": 10000</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>8.permission 小程序接口权限相关设置</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"permission": &#123;</span><br><span class="line">  "scope.userLocation": &#123;</span><br><span class="line">    "desc": "你的位置信息将用于小程序位置接口的效果展示" // 高速公路行驶持续后台定位</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>9.routes 小程序自定义路由相关设置</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.json</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"pages"</span>: [</span><br><span class="line">        <span class="string">"pages/home/home"</span>,</span><br><span class="line">        <span class="string">"pages/list/list"</span>,</span><br><span class="line">        <span class="string">"pages/detail/detail"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"subPackage"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"root"</span>: <span class="string">"packageA"</span>,</span><br><span class="line">            <span class="attr">"pages"</span>: [</span><br><span class="line">                <span class="string">"pages/home/home"</span>,</span><br><span class="line">                <span class="string">"pages/list/list"</span>,</span><br><span class="line">                <span class="string">"pages/detail/detail"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"routes"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"path"</span>: <span class="string">"home"</span>, <span class="comment">// 投放入口，scheme中的path</span></span><br><span class="line">            <span class="attr">"page"</span>: <span class="string">"pages/home/home"</span> <span class="comment">// 真实的物理存储路径</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"path"</span>: <span class="string">"list"</span>,</span><br><span class="line">            <span class="attr">"page"</span>: <span class="string">"pages/list/list"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"path"</span>: <span class="string">"foo/bar"</span>,</span><br><span class="line">            <span class="attr">"page"</span>: <span class="string">"pages/list/list"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="pei-zhi-app-js">配置app.js</span></h2><p>存放全局的JavaScript逻辑</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">App(&#123;</span><br><span class="line">    onLaunch: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'SWAN launch'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    onShow: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'SWAN展现'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    onHide: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'SWAN当前处于后台'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    onError: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'SWAN发生错误'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    globalData: <span class="string">'SWAN'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>获取全局唯一的App示例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// xxx.js</span></span><br><span class="line"><span class="keyword">const</span> appInstance = getApp()</span><br><span class="line"><span class="built_in">console</span>.log(appInstance.globalData)</span><br></pre></td></tr></table></figure>
+
+<h2><span id="xiao-cheng-xu-ye-mian">小程序页面</span></h2><h4><span id="kai-fa-css-wen-jian">开发.css文件</span></h4><h4><span id="kai-fa-js-wen-jian">开发.js文件</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;view&gt;&#123;&#123; me &#125;&#125;&lt;&#x2F;view&gt;</span><br><span class="line">&lt;button bind:tap&#x3D;&quot;setName&quot;&gt;点击变值&lt;&#x2F;button&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    setName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123; <span class="attr">me</span>: <span class="string">"aaa"</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4><span id="kai-fa-json-wen-jian">开发.json文件</span></h4><p>页面中配置项会覆盖 app.json 的 window 中相同的配置项。</p>
+<h4><span id="kai-fa-swan-wen-jian">开发.swan文件</span></h4><p><strong>1.循环s-for</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;view&gt;</span><br><span class="line">    &lt;view s-for&#x3D;&quot;p in persons&quot;&gt;</span><br><span class="line">    &#123;&#123;p.name&#125;&#125;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    data: &#123;</span><br><span class="line">    persons: [</span><br><span class="line">        &#123;<span class="attr">name</span>: <span class="string">'superman'</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">name</span>: <span class="string">'spiderman'</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.条件s-if</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;view s-if&#x3D;&quot;is4G&quot;&gt;4G&lt;&#x2F;view&gt;</span><br><span class="line">&lt;view s-elif&#x3D;&quot;isWifi&quot;&gt;Wifi&lt;&#x2F;view&gt;</span><br><span class="line">&lt;view s-else&gt;Other&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    data: &#123;</span><br><span class="line">    is4G: <span class="literal">true</span>,</span><br><span class="line">    isWifi: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.事件处理</strong></p>
+<p>bind: + 事件名</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>触发条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>touchstart</td>
+<td>手指触摸开始</td>
+</tr>
+<tr>
+<td>touchmove</td>
+<td>手指触摸后进行移动</td>
+</tr>
+<tr>
+<td>touchend</td>
+<td>手指触摸结束</td>
+</tr>
+<tr>
+<td>touchcancel</td>
+<td>手指触摸动作被打断，如来电提醒等</td>
+</tr>
+<tr>
+<td>tap</td>
+<td>手指触摸后马上离开动作</td>
+</tr>
+</tbody></table>
+<p><strong>4.事件对象</strong></p>
+<p>事件触发时，SWAN会给触发的方法传递事件对象</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">type</td>
+<td align="left">String</td>
+<td align="left">事件类型</td>
+</tr>
+<tr>
+<td align="left">currentTarget</td>
+<td align="left">Object</td>
+<td align="left">事件触发的属性集合</td>
+</tr>
+</tbody></table>
+<p><strong>5.dataset</strong></p>
+<p>在组件中自定义数据（属性值也可以是动态的），并在事件发生时，由SWAN所在事件对象中，传递给绑定函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;view data-swan&#x3D;&quot;1&quot; bind:tap&#x3D;&quot;viewtap&quot;&gt;dataset-test&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    viewtap: <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'value is:'</span>, event.currentTarget.dataset.swan);<span class="comment">// 输出1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>6.Touch对象</strong></p>
+<p>event.touches=&gt;clientX、clientY、pageX、pageY</p>
+<h4><span id="ye-mian-zhan">页面栈</span></h4><table>
+<thead>
+<tr>
+<th>路由方式</th>
+<th>页面栈表现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>初始化</td>
+<td>新页面入栈</td>
+</tr>
+<tr>
+<td>打开新页面</td>
+<td>新页面入栈</td>
+</tr>
+<tr>
+<td>页面重定向</td>
+<td>当前页面出栈，新页面入栈</td>
+</tr>
+<tr>
+<td>页面返回</td>
+<td>页面出栈</td>
+</tr>
+<tr>
+<td>Tab 切换</td>
+<td>页面全部出栈，只留下初始的 Tab 页面</td>
+</tr>
+<tr>
+<td>重加载</td>
+<td>页面全部出栈，只留下新的页面</td>
+</tr>
+</tbody></table>
+<p>可以使用getCurrentPages()函数获取当前页面栈</p>
+<h4><span id="lu-you-fang-shi">路由方式</span></h4><p><strong>1.页面栈</strong></p>
+<table>
+<thead>
+<tr>
+<th>路由方式</th>
+<th>页面栈表现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>初始化</td>
+<td>新页面入栈</td>
+</tr>
+<tr>
+<td>打开新页面</td>
+<td>新页面入栈</td>
+</tr>
+<tr>
+<td>页面重定向</td>
+<td>当前页面出栈，新页面入栈。</td>
+</tr>
+<tr>
+<td>页面返回</td>
+<td>页面不断出栈，直到目标返回页。</td>
+</tr>
+<tr>
+<td>Tab 切换</td>
+<td>页面全部出栈，只留下新的 Tab 页面。</td>
+</tr>
+</tbody></table>
+<p><strong>2.getCurrentPages()</strong></p>
+<p>获取当前页面栈的实例，以数组形式按栈的顺序给出，第一个元素为首页，最后一个元素为当前页面。</p>
+<p><strong>3.路由方式</strong></p>
+<table>
+<thead>
+<tr>
+<th>路由方式</th>
+<th>触发时机</th>
+<th>路由前页面</th>
+<th>路由后页面</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>初始化</td>
+<td>智能小程序打开的第一个页面</td>
+<td></td>
+<td>onLoad, onShow</td>
+</tr>
+<tr>
+<td>打开新页面</td>
+<td>swan.navigateTo、 &lt; navigator open-type=”navigateTo”/ &gt;</td>
+<td>onHide</td>
+<td>onLoad, onShow</td>
+</tr>
+<tr>
+<td>页面重定向</td>
+<td>swan.redirectTo 、&lt; navigator open-type=”redirectTo”/ &gt;</td>
+<td>onUnload</td>
+<td>onLoad, onShow</td>
+</tr>
+<tr>
+<td>Tab 切换</td>
+<td>swan.switchTab、&lt; navigator open-type=”switchTab”/ &gt; 、用户切换 Tab</td>
+<td></td>
+<td>各种情况请参考下表</td>
+</tr>
+<tr>
+<td>页面返回</td>
+<td>swan.navigateBack、 &lt; navigator open-type=”navigateBack”/ &gt; 、用户按左上角返回按钮</td>
+<td>onUnload</td>
+<td>onShow</td>
+</tr>
+<tr>
+<td>重启动</td>
+<td>swan.reLaunch 、&lt; navigator open-type=”reLaunch”/ &gt;</td>
+<td>onUnload</td>
+<td>onLoad, onShow</td>
+</tr>
+</tbody></table>
+<p>Tab 切换对应的生命周期（以 A、B 页面为 Tabbar 页面，C 是从 A 页面打开的页面，D 页面是从 C 页面打开的页面为例）</p>
+<table>
+<thead>
+<tr>
+<th>当前页面</th>
+<th>路由后页面</th>
+<th>触发的生命周期（按顺序）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>A</td>
+<td>Nothing happend</td>
+</tr>
+<tr>
+<td>A</td>
+<td>B</td>
+<td>A.onHide(), B.onLoad(), B.onShow()</td>
+</tr>
+<tr>
+<td>A</td>
+<td>B（再次打开）</td>
+<td>A.onHide(), B.onShow()</td>
+</tr>
+<tr>
+<td>C</td>
+<td>A</td>
+<td>C.onUnload(), A.onShow()</td>
+</tr>
+<tr>
+<td>C</td>
+<td>B</td>
+<td>C.onUnload(), B.onLoad(), B.onShow()</td>
+</tr>
+<tr>
+<td>D</td>
+<td>B</td>
+<td>D.onUnload(), C.onUnload(), B.onLoad(), B.onShow()</td>
+</tr>
+<tr>
+<td>D（从转发进入）</td>
+<td>A</td>
+<td>D.onUnload(), A.onLoad(), A.onShow()</td>
+</tr>
+<tr>
+<td>D（从转发进入）</td>
+<td>B</td>
+<td>D.onUnload(), B.onLoad(), B.onShow()</td>
+</tr>
+</tbody></table>
+<ul>
+<li>navigateTo、redirectTo只能打开非tabBar页面</li>
+<li>switchTab只能打开tabBar页面</li>
+<li>reLaunch可以打开任意页面</li>
+<li>只要定义为tabBar的页面，底部都有tabBar</li>
+<li>调用页面路由带的参数可以在目标页面的onLoad中获取</li>
+</ul>
+<h4><span id="zi-ding-yi-lu-you">自定义路由</span></h4><p>使用自定义路由的方式，是在app.json中增加路由规则字段routes的配置。</p>
+<p><strong>1.路由映射规则</strong></p>
+<p>显式声明路由映射规则</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.json</span></span><br><span class="line">routes: [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"path"</span>: <span class="string">"foo"</span>,</span><br><span class="line">        <span class="attr">"page"</span>: <span class="string">"pages/bar/baz"</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>如果没有在routes中未找到path值为‘foo’的规则，则使用默认规则</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.json</span></span><br><span class="line">routes: [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"path"</span>: <span class="string">"foo"</span>,</span><br><span class="line">        <span class="attr">"page"</span>: <span class="string">"foo"</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>采用自定义路由之前，路由路径 path与页面源码文件路径 page 两个概念值一定相等。但采用自定义路由之后，被拆分为两个独立概念，其值可能不同。因此，此小节将介绍使用自定义路由之后，与导航相关的一些能力接口的含义划分。</p>
+<p><strong>2.使用自定义路由后，所有导航相关的接口都会采用新的路由规则</strong></p>
+<p> url 属性对应自定义路由规则的 path 字段</p>
+<p>导航API：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 跳转首页</span></span><br><span class="line">navigateTo(<span class="string">'home'</span>);</span><br><span class="line"><span class="comment">// 切换到 tab 页 list</span></span><br><span class="line">switchTab(<span class="string">'list'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>导航组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 跳转首页</span><br><span class="line">&lt;navigator open-type&#x3D;&quot;navigate&quot; url&#x3D;&quot;home&quot;&gt;首页&lt;&#x2F;navigator&gt;</span><br><span class="line">&#x2F;&#x2F; 切换到 tab 页 list</span><br><span class="line">&lt;navigator open-type&#x3D;&quot;switchTab&quot; url&#x3D;&quot;list&quot;&gt;列表&lt;&#x2F;navigator&gt;</span><br></pre></td></tr></table></figure>
+
+<p>页面分享路径指定：</p>
+<p>path参数对应自定义路由规则的 path 字段</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">swan.openShare(&#123;</span><br><span class="line">    title: <span class="string">'智能小程序示例'</span>,</span><br><span class="line">    content: <span class="string">'世界很复杂，百度更懂你'</span>,</span><br><span class="line">    path: <span class="string">'/pages/home/index'</span>,</span><br><span class="line">    imageUrl: <span class="string">'https://smartprogram.baidu.com/docs/img/logo_new.png'</span>,</span><br><span class="line">    success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        swan.showToast(&#123;</span><br><span class="line">            title: <span class="string">'分享成功'</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">onShareAppMessage()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        title: <span class="string">'智能小程序示例'</span>,</span><br><span class="line">        content: <span class="string">'世界很复杂，百度更懂你'</span>,</span><br><span class="line">        path: <span class="string">'/pages/home/index'</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打开小程序的scheme：</p>
+<p>scheme 的 page 部分对应自定义路由规则的 path 字段</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用调起 sdk 打开</span></span><br><span class="line"><span class="built_in">window</span>.swanInvoke(&#123;</span><br><span class="line">    appKey: <span class="string">'4fecoAqgCIUtzIyA4FAPgoyrc4oUc25c'</span>,</span><br><span class="line">    path: <span class="string">'home'</span>,</span><br><span class="line">    query: &#123;</span><br><span class="line">        id: <span class="number">1</span>,</span><br><span class="line">        type: <span class="string">'a'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>跳转其他小程序页面 API navigateToSmartProgram：</p>
+<p>其中 path 参数对应自定义路由规则的 path 字段</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">swan.navigateToSmartProgram(&#123;</span><br><span class="line">    appKey: <span class="string">'4fecoAqgCIUtzIyA4FAPgoyrc4oUc25c'</span>,</span><br><span class="line">    path: <span class="string">'home'</span>,</span><br><span class="line">    success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'navigateToSmartProgram success'</span>, res);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.使用自定义路由后，有些能力接口仍然表示为页面源码文件路径</strong></p>
+<p>小程序页面列表 app.json 中的pages字段：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.json</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"pages"</span>: [</span><br><span class="line">        <span class="string">"pages/home/index"</span>,</span><br><span class="line">        ...</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>小程序分包配置app.json中的subPackages字段：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.json</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"subPackages"</span>: &#123;</span><br><span class="line">        <span class="attr">"root"</span>: <span class="string">"subpack"</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"subpack"</span>,  </span><br><span class="line">        <span class="attr">"pages"</span>: [</span><br><span class="line">            <span class="string">"shop/list"</span>,</span><br><span class="line">            ...</span><br><span class="line">        ],</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>底部导航tabBar配置app.json中的tabBar字段：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.json</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="attr">"tabBar"</span>: &#123;</span><br><span class="line">    <span class="attr">"list"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"pagePath"</span>: <span class="string">"subpack/shop/list"</span>,</span><br><span class="line">            <span class="attr">"text"</span>: <span class="string">"列表"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        ...</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4><span id="page">Page</span></h4><p>Page() 函数用来注册一个页面。接受一个 object 参数，其指定页面的初始数据、生命周期函数、事件处理函数等。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>data</td>
+<td>Object</td>
+<td>页面的初始数据</td>
+</tr>
+<tr>
+<td>onInit</td>
+<td>Function</td>
+<td>监听页面初始化的生命周期函数</td>
+</tr>
+<tr>
+<td>onLoad</td>
+<td>Function</td>
+<td>监听页面加载的生命周期函数</td>
+</tr>
+<tr>
+<td>onReady</td>
+<td>Function</td>
+<td>监听页面初次渲染完成的生命周期函数</td>
+</tr>
+<tr>
+<td>onShow</td>
+<td>Function</td>
+<td>监听页面显示的生命周期函数</td>
+</tr>
+<tr>
+<td>onHide</td>
+<td>Function</td>
+<td>监听页面隐藏的生命周期函数</td>
+</tr>
+<tr>
+<td>onUnload</td>
+<td>Function</td>
+<td>监听页面卸载的生命周期函数</td>
+</tr>
+<tr>
+<td>onPullDownRefresh</td>
+<td>Function</td>
+<td>监听用户下拉动作</td>
+</tr>
+<tr>
+<td>onReachBottom</td>
+<td>Function</td>
+<td>页面上拉触底事件的处理函数</td>
+</tr>
+<tr>
+<td>onShareAppMessage</td>
+<td>Function</td>
+<td>用户点击右上角转发</td>
+</tr>
+<tr>
+<td>onURLQueryChange</td>
+<td>Function</td>
+<td>监听页面 URL query 改变</td>
+</tr>
+<tr>
+<td>onError</td>
+<td>Function</td>
+<td>错误监听函数</td>
+</tr>
+</tbody></table>
+<h4><span id="zu-jian">组件</span></h4><p>可以在组件上绑定事件，在相应的组件事件发生时，得到回调与组件信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;slider min&#x3D;&quot;200&quot; max&#x3D;&quot;1500&quot; value&#x3D;&quot;&#123;&#123;switchDuration&#125;&#125;&quot; bind:change&#x3D;&quot;changeSlider&quot;&gt;&lt;&#x2F;slider&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    changeSlider: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'changeSwitchDuration'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4><span id="api">API</span></h4><p>直接调用 SWAN 对象上的端能力方法， Page 对象中 this 上挂载的方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">swan.showToast(&#123;</span><br><span class="line">    title: <span class="string">'我是标题'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    data: &#123;&#125;,</span><br><span class="line">    onLoad: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.createCanvasContext();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    data: &#123;&#125;,</span><br><span class="line">    onLoad: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    swan.createCanvasContext();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2><span id="zi-ding-yi-zu-jian">自定义组件</span></h2><h4><span id="zai-components-wen-jian-zhong-chuang-jian-ye-mian">在components文件中创建页面</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 包含自定义组件custom的项目结构</span><br><span class="line">├── app.js</span><br><span class="line">├── app.json</span><br><span class="line">├── project.swan.json</span><br><span class="line">└── components</span><br><span class="line">    └── custom</span><br><span class="line">        ├── custom.swan</span><br><span class="line">        ├── custom.css</span><br><span class="line">        ├── custom.js</span><br><span class="line">        └── custom.json</span><br></pre></td></tr></table></figure>
+
+<h4><span id="sheng-ming-zi-ding-yi-zu-jian">声明自定义组件</span></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义组件配置 (custom.json)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"component"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4><span id="zai-swan-wen-jian-zhong-bian-xie-zu-jian-mo-ban-zai-css-wen-jian-zhong-yin-ru-yang-shi">在swan文件中编写组件模板，在css文件中引入样式</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 自定义组件内部的模板 (custom.swan) --&gt;</span><br><span class="line">&lt;view class&#x3D;&quot;name&quot;&gt;</span><br><span class="line">    &#123;&#123;name&#125;&#125;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 自定义组件的css，在该自定义组件内部生效 (custom.css) */</span></span><br><span class="line"><span class="selector-class">.name</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.组件模板</strong></p>
+<p>组件模板与组件数据结合后生成的节点树，将被插入的组件的引用位置上。</p>
+<p>通过name属性可以给slot命名，外层组件或页面的元素通过slot=”name”的属性声明，插入指定自身的插入点。</p>
+<p>往往渲染过程使用外部传入的数据环境，但当slot声明中包含s-bind或一个以上var-数据前缀声明，该slot为scoped slot。渲染过程则使用组件内部数据。</p>
+<p><strong>2.组件样式</strong></p>
+<p>使用class选择器，避免使用后代选择器，会从组件外继承到组件内。</p>
+<ul>
+<li>外部样式类</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 组件 custom-component.js */</span></span><br><span class="line">Component(&#123;</span><br><span class="line">    externalClasses: [<span class="string">'external-class'</span>] </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 组件 custom-component.swan --&gt;</span><br><span class="line">&lt;view class&#x3D;&quot;external-class&quot;&gt;这段文本的颜色由组件外的 class 决定&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 使用组件的页面或者组件 --&gt;</span><br><span class="line">&lt;custom-component external-class&#x3D;&quot;red-text&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.red-text</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>全局样式类，则是使用全局qpp.css的样式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 组件 custom-component.js */</span></span><br><span class="line">Component(&#123;</span><br><span class="line">    options: &#123;</span><br><span class="line">        addGlobalClass: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4><span id="zhu-ce-zu-jian-ti-gong-zu-jian-de-shu-xing-ding-yi-nei-bu-shu-ju-he-zi-ding-yi-fang-fa-bei-yong-yu-zu-jian-swan-mo-ban-de-xuan-ran-shu-xing-ke-you-zu-jian-wai-bu-chuan-ru">注册组件，提供组件的属性定义、内部数据和自定义方法，被用于组件swan模板的渲染，属性可由组件外部传入</span></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义组件逻辑 (custom.js)</span></span><br><span class="line">Component(&#123;</span><br><span class="line">    properties: &#123;</span><br><span class="line">        <span class="comment">// 定义了name属性，可以在使用组件时，由外部传入。此变量可以直接在组件模板中使用</span></span><br><span class="line">        name: &#123;</span><br><span class="line">            type: <span class="built_in">String</span>,</span><br><span class="line">            value: <span class="string">'swan'</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    data: &#123;</span><br><span class="line">        <span class="comment">// 这里是一些组件内部数据</span></span><br><span class="line">        age: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="comment">// 这里是一个自定义方法</span></span><br><span class="line">        tap: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.指定组件的属性、数据、方法</strong></p>
+<ul>
+<li><p>properties：组件的对外属性</p>
+<ul>
+<li>type：属性类型</li>
+<li>value：属性初始值</li>
+<li>observer：属性值更改时的响应函数，监听的是setData中涉及的数据字段<ul>
+<li>监听子数据字段</li>
+<li>监听子数据字段变化**</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>data：组建的内部数据</p>
+</li>
+<li><p>methods：组件的方法，通过this访问，页面的生命周期方法写在method内（即on开头的方法）</p>
+</li>
+<li><p>behaviors：提取所有页面中公用的代码段，通过this访问</p>
+<ul>
+<li>Behavior()构造器定义</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; behavior.js</span><br><span class="line">module.exports &#x3D; Behavior(&#123;</span><br><span class="line">    attached: function() &#123;</span><br><span class="line">        &#x2F;&#x2F; 页面创建时执行</span><br><span class="line">        console.info(&#39;Page loaded!&#39;)</span><br><span class="line">    &#125;,</span><br><span class="line">    detached: function() &#123;</span><br><span class="line">        &#x2F;&#x2F; 页面销毁时执行</span><br><span class="line">        console.info(&#39;Page unloaded!&#39;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>require（）调用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 自定义组件 A</span><br><span class="line">var pageCommonBehavior &#x3D; require(&#39;..&#x2F;behavior.js&#39;)</span><br><span class="line">Component(&#123;</span><br><span class="line">    behaviors: [pageCommonBehavior],</span><br><span class="line">    data: &#123; &#x2F;* ... *&#x2F; &#125;,</span><br><span class="line">    methods: &#123; &#x2F;* ... *&#x2F; &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>behaviors: [‘swan://form-field’]，往组件添加一些属性name、value</li>
+<li>behaviors: [‘swan://component-export’]，支持export定义段，指定组件被 selectComponent 调用时的返回值。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义组件的js文件</span></span><br><span class="line">Component(&#123;</span><br><span class="line">    behaviors: [<span class="string">'swan://component-export'</span>],</span><br><span class="line">    <span class="keyword">export</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">componentField</span>: <span class="string">'componentValue'</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 使用自定义组件时，对于自定义组件的引用模板 --&gt;</span><br><span class="line">&lt;my-component id&#x3D;&quot;custom-id&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.selectComponent(<span class="string">'#custom-id'</span>) <span class="comment">// 等于 &#123; componentField: 'componentValue' &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生命周期函数：created、attached、ready、detached，通过this访问</p>
+</li>
+</ul>
+<p><strong>2.组件间的通信</strong></p>
+<ul>
+<li>dispatch</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 父组件逻辑 */</span></span><br><span class="line">Component(&#123;</span><br><span class="line">    messages: &#123;</span><br><span class="line">        <span class="string">'childmessage'</span>: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'childmessage'</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 子组件逻辑 */</span></span><br><span class="line">Component(&#123;</span><br><span class="line">    created() &#123;</span><br><span class="line">        <span class="keyword">this</span>.dispatch(<span class="string">'childmessage'</span>, &#123;</span><br><span class="line">            name: <span class="string">'swan'</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>triggerEvent</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;child.swan</span><br><span class="line">&lt;button bindtap&#x3D;&quot;onTap&quot;&gt;点击这个按钮将触发 myevent 事件&lt;&#x2F;button&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//child.js</span></span><br><span class="line">Component(&#123;</span><br><span class="line">    properties: &#123;&#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        onTap: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> myEventDetail = &#123;&#125; <span class="comment">// detail对象，提供给事件监听函数</span></span><br><span class="line">            <span class="keyword">var</span> myEventOption = &#123;<span class="attr">bubbles</span>:<span class="literal">true</span>&#125; <span class="comment">// 触发事件的选项</span></span><br><span class="line">            <span class="keyword">this</span>.triggerEvent(<span class="string">'myevent'</span>, myEventDetail, myEventOption);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//parent.swan</span></span><br><span class="line">&lt;child bindmyevent=<span class="string">"listener"</span>&gt;&lt;<span class="regexp">/child&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//parent.js</span></span><br><span class="line">Page(&#123;</span><br><span class="line">    listener: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>冒泡与捕获</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 页面 index.swan --&gt;</span><br><span class="line">&lt;parent bindcustomevent&#x3D;&quot;pageEventListener1&quot;&gt;</span><br><span class="line">  &lt;child bindcustomevent&#x3D;&quot;pageEventListener2&quot;&gt;&lt;&#x2F;child&gt;</span><br><span class="line">&lt;&#x2F;parent&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- 组件 parent.swan --&gt;</span><br><span class="line">&lt;view bindcustomevent&#x3D;&quot;anotherEventListener&quot;&gt;</span><br><span class="line">  &lt;slot &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- 组件 child.swan --&gt;</span><br><span class="line">&lt;view bindcustomevent&#x3D;&quot;myEventListener&quot;&gt;</span><br><span class="line">  &lt;button bindtap&#x3D;&quot;onTap&quot;&gt;点我触发&lt;&#x2F;button&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组件 child.js</span></span><br><span class="line">Component(&#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    onTap: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.triggerEvent(<span class="string">'customevent'</span>, &#123;&#125;) <span class="comment">// 只会触发 pageEventListener2</span></span><br><span class="line">    <span class="comment">//   this.triggerEvent('customevent', &#123;&#125;, &#123; bubbles: true &#125;) // 会依次触发 pageEventListener2 、 pageEventListener1</span></span><br><span class="line">    <span class="comment">//   this.triggerEvent('customevent', &#123;&#125;, &#123; bubbles: true, capturePhase: true &#125;) // 会依次触发 pageEventListener2 、 anotherEventListener 、 pageEventListener1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.生命周期</strong></p>
+<ul>
+<li><p>created、attached、ready、detached可以直接在Component、lifetimes字段内进行声明（优先级最高）</p>
+</li>
+<li><p>show、hide在pageLifetimes字段内进行声明</p>
+</li>
+</ul>
+<h4><span id="shi-yong-zi-ding-yi-zu-jian">使用自定义组件</span></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 页面json配置 home.json</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"usingComponents"</span>: &#123;</span><br><span class="line">        <span class="string">"custom"</span>: <span class="string">"/components/custom/custom"</span> <span class="comment">//将以custom作为标签名使用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 页面模板 (home.swan) --&gt;</span><br><span class="line">&lt;view&gt;</span><br><span class="line">    &lt;!-- 在页面中对自定义组件进行引用 --&gt;</span><br><span class="line">    &lt;custom name&#x3D;&quot;swanapp&quot;&gt;&lt;&#x2F;custom&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<h4><span id="chou-xiang-jie-dian">抽象节点</span></h4><p><strong>1.声明抽象节点</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;componentGenerics&quot;: &#123;</span><br><span class="line">    &#x2F;&#x2F;&quot;selected&quot;:true</span><br><span class="line">    &quot;selectable&quot;: &#123;</span><br><span class="line">       &quot;default&quot;: &quot;&#x2F;components&#x2F;checkbox&#x2F;checkbox&quot; &#x2F;&#x2F;默认值</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>2.使用抽象节点</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;selectable-group generic:selectable&#x3D;&quot;custom-radio&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>所以custom-radio对应的路径要放在页面json中</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"usingComponents"</span>: &#123;</span><br><span class="line">        <span class="attr">"custom-radio"</span>: <span class="string">"path/to/custom/radio"</span>,</span><br><span class="line">        <span class="attr">"custom-checkbox"</span>: <span class="string">"path/to/custom/checkbox"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4><span id="zi-ding-yi-zu-jian-kuo-zhan">自定义组件扩展</span></h4><p>Behavior() 构造器提供了新的定义段 definitionFilter，用于支持自定义组件扩展。 definitionFilter 是一个函数，在被调用时会注入两个参数：</p>
+<ul>
+<li>第一个参数是使用该 behavior 的 component/behavior 的定义对象；</li>
+<li>第二个参数是该 behavior 所使用的 behavior 的 definitionFilter 函数列表。</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a class="next" href="/2020/06/15/2020-06-15%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E4%BA%91%E5%BC%80%E5%8F%91%E7%AF%87/">next</a></div><div class="copyright"><p>&copy; 2020 <a href="https://YANG-meng-97.github.io">YANG-meng-97</a><br>Powered by <a href="https://hexo.io/" rel="noreferrer" target="_blank">Hexo</a></p></div></footer></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+    Barba.Pjax.start()
+})</script></body></html>
